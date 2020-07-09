@@ -1,0 +1,30 @@
+apiVersion: v1beta4
+baseDomain: your_domain.local
+compute:
+- hyperthreading: Enabled   
+  name: worker
+  replicas: 3
+controlPlane:
+  hyperthreading: Enabled   
+  name: master
+  replicas: 3
+metadata:
+  name: devcluster
+networking:
+  clusterNetwork:
+  - cidr: "10.128.0.0/14"
+    hostPrefix: 23
+  machineCIDR: "192.168.1.0/24"
+  serviceCIDR: "172.30.0.0/16"
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - "172.30.0.0/16"
+platform:
+  vsphere:
+    vCenter: 192.168.1.20
+    username: "vsphere username"
+    password: "vsphere password"
+    datacenter: DC_NAME
+    defaultDatastore: datastore1
+pullSecret: '{"auths":{"fake":{"auth": "bar"}}}'
+sshKey: 'your_pub_ssh_key'
